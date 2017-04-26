@@ -23,7 +23,28 @@ def create_graph(filename):
 
 	legend = ax.legend(loc='upper center', shadow=True)
 	plt.show()
-		
+	
+def create_bar(filename):
+	lst_serial,lst_concurrent,lst_paper,lst_num=[],[],[],[]
+	with open(filename,"r") as reader:
+		for line in reader:
+			lst= map(float,line.strip().split())
+			lst_serial.append(lst[0])
+			lst_concurrent.append(lst[1])
+			lst_paper.append(lst[2])
+			lst_num.append(lst[3])
+
+	width=0.2
+	fig=plt.figure()
+	ax= fig.add_subplot(111)
+	ax.bar(lst_num,lst_concurrent,width,color='b')
+	plt.xlabel('Size')
+	plt.ylabel('time(ms)')
+	plt.legend()
+	# plt.tight_layout()
+	plt.show()
+
 if __name__=='__main__':
 	filename= sys.argv[1]
-	create_graph(filename)
+	# create_graph(filename)
+	create_bar(filename)
